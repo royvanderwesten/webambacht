@@ -1,5 +1,5 @@
-import {exampleReducer} from "./reducers/example.reducer";
+import {userReducer} from "./reducers/user.reducer";
 
 export const reducers = {
-  exampleStore: exampleReducer
+  user: userReducer
 }

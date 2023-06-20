@@ -14,6 +14,26 @@ import { SearchBarComponent } from './components/search-bar/search-bar.component
 import { AccountDropdownComponent } from './components/account-dropdown/account-dropdown.component';
 import { MainNavigationComponent } from './components/main-navigation/main-navigation.component';
 
+import { initializeApp } from "firebase/app";
+import { AppRoutingModule } from './app-routing.module';
+import { LoginPageComponent } from './pages/login-page/login-page.component';
+import {ReactiveFormsModule} from "@angular/forms";
+
+import { getAuth } from "firebase/auth";
+import {AngularFireAuthGuard} from "@angular/fire/compat/auth-guard";
+import {provideFirebaseApp} from "@angular/fire/app";
+import {provideAuth} from "@angular/fire/auth";
+import {AngularFireModule} from "@angular/fire/compat";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDonoOIsH_MnxdhNBWbpCrT25llWwXCYGs",
+  authDomain: "webambacht.firebaseapp.com",
+  projectId: "webambacht",
+  storageBucket: "webambacht.appspot.com",
+  messagingSenderId: "131229271588",
+  appId: "1:131229271588:web:bf6be3931a264fa7eebab1"
+};
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,15 +44,21 @@ import { MainNavigationComponent } from './components/main-navigation/main-navig
     DefaultNavComponent,
     SearchBarComponent,
     AccountDropdownComponent,
-    MainNavigationComponent
+    MainNavigationComponent,
+    LoginPageComponent
   ],
   imports: [
+    ReactiveFormsModule,
     BrowserModule,
     StoreModule.forRoot(reducers),
     EffectsModule.forRoot([]),
-    StoreDevtoolsModule.instrument({ maxAge: 25 })
+    StoreDevtoolsModule.instrument({ maxAge: 25 }),
+    AppRoutingModule,
+    AngularFireModule.initializeApp(firebaseConfig),
+    provideFirebaseApp(() => initializeApp(firebaseConfig)),
+    provideAuth(() => getAuth()),
   ],
-  providers: [],
+  providers: [AngularFireAuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule {

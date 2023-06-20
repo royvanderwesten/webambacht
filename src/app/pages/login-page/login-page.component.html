@@ -1,0 +1,17 @@
+<h3>Inloggen</h3>
+<form [formGroup]="signInForm" (submit)="submitSignIn()">
+  <input type="text" formControlName="email">
+  <input type="password" formControlName="password">
+
+  <button type="submit">Sign in</button>
+</form>
+
+
+<h3>Aanmelden</h3>
+<form [formGroup]="signUpForm" (submit)="submitSignUp()">
+  <input type="text" formControlName="email">
+  <input type="password" formControlName="password">
+
+  <button type="submit">Sign up</button>
+</form>
+
