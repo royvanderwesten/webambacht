@@ -1,0 +1,38 @@
+<ba-panel *ngIf="showCreateContent">
+  <button class="btn btn--primary" (click)="showCreateContent = false">
+    Sluiten
+  </button>
+
+  <form [formGroup]="createContentForm" (submit)="submitContent(createContentForm); showCreateContent = false">
+    <select formControlName="contentType">
+      <option *ngFor="let type of contentTypes" [value]="type.type">
+        {{ type.name }}
+      </option>
+    </select>
+
+    <input type="text" formControlName="title">
+    <input type="text" formControlName="description">
+
+    <button class="btn btn--primary"
+            [class.btn--disabled]="!createContentForm.valid">
+      Create
+    </button>
+  </form>
+</ba-panel>
+
+<button class="btn btn--primary" (click)="showCreateContent = true">
+  Add content
+</button>
+
+<div class="page-builder__configurator">
+  <ng-container *ngFor="let contentSection of page">
+    <div class="content-type content-type--editable" [class]="'content-type__' + contentSection.contentType">
+      <h2>
+        {{ contentSection.title }}
+      </h2>
+      <p>
+        {{ contentSection.description }}
+      </p>
+    </div>
+  </ng-container>
+</div>

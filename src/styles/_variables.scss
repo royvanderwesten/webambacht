@@ -1,11 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+
 //Create variables like colors, borders, fonts etc. here!
-$--ba-color-primary: #FE5000;
+$--ba-color-primary: #0094FF;
 $--ba-color-secondary: #041C26;
-$--ba-color-lightgrey: #F6F5F5;
+$--ba-color-light-grey: #F6F6F6;
+$--ba-color-dark-grey: #383838;
 $--ba-color-black: #000000;
 $--ba-color-white: #FFFFFF;
 
 $--ba-border-radius--full: 9999px;
+$--ba-border-radius: 6px;
 
-$--ba-font-primary: 'Montserrat', sans-serif;
-$--ba-font-secondary: 'Work Sans', sans-serif;
+$--ba-font-primary: 'Inter', sans-serif;
+$--ba-font-secondary: 'Inter', sans-serif;
+
+$--ba-font-weight-bold: 700;
+$--ba-font-weight-regular: 400;
+
+$--ba-nav-shadow: 0px -1px 10px rgba(0, 0, 0, 0.2);
+

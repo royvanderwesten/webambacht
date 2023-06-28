@@ -24,6 +24,13 @@ import {AngularFireAuthGuard} from "@angular/fire/compat/auth-guard";
 import {provideFirebaseApp} from "@angular/fire/app";
 import {provideAuth} from "@angular/fire/auth";
 import {AngularFireModule} from "@angular/fire/compat";
+import { PageBuilderComponent } from './blocks/page-builder/page-builder.component';
+import { PageBuilderNavComponent } from './blocks/page-builder-nav/page-builder-nav.component';
+import { PageBuilderViewComponent } from './blocks/page-builder-view/page-builder-view.component';
+import { PageBuilderConfiguratorComponent } from './blocks/page-builder-configurator/page-builder-configurator.component';
+import { CreatePageComponent } from './components/create-page/create-page.component';
+import { PanelComponent } from './layout/panel/panel.component';
+import { DataMapPipe } from './pipes/data-map.pipe';
 
 const firebaseConfig = {
   apiKey: "AIzaSyDonoOIsH_MnxdhNBWbpCrT25llWwXCYGs",
@@ -45,18 +52,25 @@ const firebaseConfig = {
     SearchBarComponent,
     AccountDropdownComponent,
     MainNavigationComponent,
-    LoginPageComponent
+    LoginPageComponent,
+    PageBuilderComponent,
+    PageBuilderNavComponent,
+    PageBuilderViewComponent,
+    PageBuilderConfiguratorComponent,
+    CreatePageComponent,
+    PanelComponent,
+    DataMapPipe
   ],
   imports: [
+    AngularFireModule.initializeApp(firebaseConfig),
+    provideFirebaseApp(() => initializeApp(firebaseConfig)),
+    provideAuth(() => getAuth()),
     ReactiveFormsModule,
     BrowserModule,
     StoreModule.forRoot(reducers),
     EffectsModule.forRoot([]),
     StoreDevtoolsModule.instrument({ maxAge: 25 }),
-    AppRoutingModule,
-    AngularFireModule.initializeApp(firebaseConfig),
-    provideFirebaseApp(() => initializeApp(firebaseConfig)),
-    provideAuth(() => getAuth()),
+    AppRoutingModule
   ],
   providers: [AngularFireAuthGuard],
   bootstrap: [AppComponent]

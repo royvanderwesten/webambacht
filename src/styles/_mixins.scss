@@ -28,6 +28,7 @@
 
 @mixin heading {
   font-family: $--ba-font-primary;
+  font-weight: $--ba-font-weight-bold;
 }
 
 @mixin heading-1 {

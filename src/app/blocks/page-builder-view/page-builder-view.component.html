@@ -1,0 +1,8 @@
+<div class="page-builder__view">
+  <ba-page-builder-configurator
+    *ngIf="page$ | async as page"
+    [page]="page"
+    (createContent)="addContent($event)">
+  </ba-page-builder-configurator>
+</div>
+

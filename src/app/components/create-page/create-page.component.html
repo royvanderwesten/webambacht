@@ -1,0 +1,15 @@
+<button class="btn btn--primary" [routerLink]="[]">Sluiten</button>
+
+<form [formGroup]="createPageForm" (submit)="onSubmit(createPageForm)">
+  <label for="name">Naam van de pagina</label>
+  <input type="text" id="name" formControlName="name" (input)="renderUrl()">
+
+  <br>
+
+  <label for="url">URL van de pagina (automatisch)</label>
+  <input type="text" id="url" formControlName="url" [attr.disabled]="true">
+
+  <button class="btn btn--primary" [class.btn--disabled]="!createPageForm.valid">
+    Aanmaken
+  </button>
+</form>

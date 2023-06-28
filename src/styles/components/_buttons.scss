@@ -1,0 +1,39 @@
+.btn {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  transition: .25s;
+
+  &--primary {
+    padding: 1em 1.5em;
+    border-radius: $--ba-border-radius;
+    background-color: $--ba-color-primary;
+    color: white;
+  }
+
+  &--disabled {
+    background-color: $--ba-color-dark-grey;
+    color: white;
+    cursor: not-allowed;
+  }
+
+  &--text {
+    color: $--ba-color-primary;
+    text-decoration: underline;
+  }
+
+  &--icon {
+    display: flex;
+    align-items: center;
+
+    svg {
+      margin-right: 1em;
+      width: 25px;
+      height: 25px;
+    }
+  }
+
+  &:hover {
+    opacity: .8;
+  }
+}

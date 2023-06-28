@@ -1,4 +1,6 @@
 import {Component, inject, OnInit} from '@angular/core';
+import {Store} from "@ngrx/store";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'ba-homepage',
@@ -8,7 +10,10 @@ import {Component, inject, OnInit} from '@angular/core';
 })
 export class HomepageComponent implements OnInit {
 
-  constructor() {
+  public uid$: Observable<any>;
+
+  constructor(private store: Store<any>) {
+    this.uid$ = this.store.select('user', 'uid');
   }
 
   ngOnInit(): void {

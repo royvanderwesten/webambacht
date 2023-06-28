@@ -1,0 +1,18 @@
+<nav class="nav-pagebuilder">
+  <form [formGroup]="selectPageForm">
+    <select formControlName="pageControl" id="pages">
+      <option
+        *ngFor="let page of pages"
+        [value]="page.url">
+        {{ page.page }}
+      </option>
+    </select>
+  </form>
+
+  <a class="btn btn--text btn--icon" [routerLink]="[]" fragment="createPage">
+    <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path fill-rule="evenodd" clip-rule="evenodd" d="M11.1446 13.8554V25H13.8554V13.8554H25V11.1446H13.8554V0H11.1446V11.1446H0V13.8554H11.1446Z" fill="#0094FF"/>
+    </svg>
+    Nieuwe pagina
+  </a>
+</nav>

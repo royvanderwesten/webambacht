@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import {Observable, Subscription} from "rxjs";
+import {map, Observable, Subscription} from "rxjs";
 import {User} from "@angular/fire/auth";
 import {AngularFireAuth} from "@angular/fire/compat/auth";
 import {Store} from "@ngrx/store";
 
 import * as fromUserActions from '../../store/actions/user.actions';
+import {AngularFirestore} from "@angular/fire/compat/firestore";
 
 @Component({
   selector: 'ba-default-nav',
@@ -18,6 +19,7 @@ export class DefaultNavComponent implements OnInit {
   public userData$: Observable<any>;
 
   constructor(private afAuth: AngularFireAuth,
+              private db: AngularFirestore,
               private store: Store<any>) {
     this.userData$ = this.store.select('user')
 

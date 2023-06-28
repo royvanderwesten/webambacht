@@ -1,0 +1,28 @@
+.content-type {
+  display: block;
+
+  &__header {
+    flex: 1;
+    margin: 1em;
+    height: 470px;
+    position: relative;
+
+    border-radius: 0 !important;
+    color: $--ba-color-white;
+    background-color: $--ba-color-black !important;
+  }
+
+  &__articleCarousel {}
+  &__requestQuote {}
+
+  &--editable {
+    padding: 10px;
+    transition: .25s;
+    border-radius: $--ba-border-radius;
+
+    &:hover {
+      cursor: pointer;
+      background-color: $--ba-color-light-grey;
+    }
+  }
+}

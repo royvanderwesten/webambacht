@@ -1,0 +1,13 @@
+nav {
+  ul, li {
+    padding: 0;
+    margin: 0;
+  }
+
+  &.nav-pagebuilder {
+    width: 100%;
+    padding: 1.5em;
+    background-color: $--ba-color-white;
+    border-bottom: 1px solid $--ba-color-light-grey;
+  }
+}

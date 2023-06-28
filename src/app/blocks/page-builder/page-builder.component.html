@@ -1,0 +1,13 @@
+<ba-panel *ngIf="showCreatePagePanel">
+  <ba-create-page></ba-create-page>
+</ba-panel>
+
+<div class="wrapper">
+  <div class="side-bar">
+    <ba-default-nav></ba-default-nav>
+  </div>
+  <div class="content">
+    <ba-page-builder-nav *ngIf="pages && pages.length > 0" [pages]="pages"></ba-page-builder-nav>
+    <router-outlet></router-outlet>
+  </div>
+</div>
