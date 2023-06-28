@@ -4,6 +4,15 @@ nav {
     margin: 0;
   }
 
+  ul {
+    display: flex;
+    flex-direction: row;
+  }
+
+  li {
+    margin-left: 2em;
+  }
+
   &.nav-pagebuilder {
     width: 100%;
     padding: 1.5em;

@@ -25,14 +25,40 @@
 </button>
 
 <div class="page-builder__configurator">
-  <ng-container *ngFor="let contentSection of page">
-    <div class="content-type content-type--editable" [class]="'content-type__' + contentSection.contentType">
+  <div class="content-type content-type__navigation">
+    <div class="content-type-navigation__logo">
+      <img src="./assets/images/barbier.svg" alt="">
+    </div>
+    <nav>
+      <ul>
+        <ng-container *ngFor="let page of pages">
+          <a>
+            <li>
+              {{ page.page }}
+            </li>
+          </a>
+        </ng-container>
+      </ul>
+    </nav>
+  </div>
+
+  <div cdkDropList class="example-list"
+       [cdkDropListData]="page"
+       (cdkDropListDropped)="drop($event)">
+    <div *ngFor="let contentSection of page"
+         cdkDrag
+         #contentType
+         class="content-type content-type--editable"
+         [class]="'content-type__' + contentSection.contentType"
+         (mousedown)="contentType.classList.add('dragging')"
+         (mouseup)="contentType.classList.remove('dragging')">
       <h2>
-        {{ contentSection.title }}
+        {{ contentSection.title }} {{ contentSection.index }}
       </h2>
       <p>
         {{ contentSection.description }}
       </p>
     </div>
-  </ng-container>
+  </div>
 </div>
+

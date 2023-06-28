@@ -1,7 +1,19 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  QueryList,
+  SimpleChanges,
+  ViewChild,
+  ViewChildren
+} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ContentTypeHeader} from "../../modals/content-type-header";
 import {ContentType} from "../../modals/content-type";
+import {CdkDragDrop, moveItemInArray} from "@angular/cdk/drag-drop";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'ba-page-builder-configurator',
@@ -9,15 +21,18 @@ import {ContentType} from "../../modals/content-type";
   styleUrls: ['./page-builder-configurator.component.scss']
 })
 
-export class PageBuilderConfiguratorComponent implements OnInit, OnChanges {
+export class PageBuilderConfiguratorComponent implements OnInit {
   @Input() page: any;
+  @Input() pages: any;
   @Output() createContent: EventEmitter<any> = new EventEmitter<any>();
+  @Output() updateContent: EventEmitter<any> = new EventEmitter<any>();
 
   public contentBlocks: any;
   public showCreateContent: boolean;
   public createContentForm: FormGroup;
 
   public contentTypes: ContentType[];
+
 
   constructor(private fb: FormBuilder) {
     const header: ContentTypeHeader = {
@@ -45,11 +60,10 @@ export class PageBuilderConfiguratorComponent implements OnInit, OnChanges {
       contentType: ['', [Validators.required]],
       title: ['', [Validators.required]],
       description: ['', [Validators.required]]
-    })
+    });
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   submitContent(form: any) {
     this.createContent.emit({
@@ -59,7 +73,17 @@ export class PageBuilderConfiguratorComponent implements OnInit, OnChanges {
     });
   }
 
-  ngOnChanges(changes: SimpleChanges) {
-    console.log(changes);
+  drop(event: CdkDragDrop<string[]>) {
+    moveItemInArray(this.page, event.previousIndex, event.currentIndex);
+    this.saveContentOrder(event.container.data);
+  }
+
+  saveContentOrder(contentBlocks: any[]) {
+    const newObjects: any = [];
+    contentBlocks.forEach((block, i) => {
+      newObjects.push({...block, index: i});
+    })
+
+    this.updateContent.emit(newObjects);
   }
 }

@@ -31,6 +31,8 @@ import { PageBuilderConfiguratorComponent } from './blocks/page-builder-configur
 import { CreatePageComponent } from './components/create-page/create-page.component';
 import { PanelComponent } from './layout/panel/panel.component';
 import { DataMapPipe } from './pipes/data-map.pipe';
+import {DragDropModule} from "@angular/cdk/drag-drop";
+import { SortByPipe } from './pipes/sort-by.pipe';
 
 const firebaseConfig = {
   apiKey: "AIzaSyDonoOIsH_MnxdhNBWbpCrT25llWwXCYGs",
@@ -59,9 +61,11 @@ const firebaseConfig = {
     PageBuilderConfiguratorComponent,
     CreatePageComponent,
     PanelComponent,
-    DataMapPipe
+    DataMapPipe,
+    SortByPipe
   ],
   imports: [
+    DragDropModule,
     AngularFireModule.initializeApp(firebaseConfig),
     provideFirebaseApp(() => initializeApp(firebaseConfig)),
     provideAuth(() => getAuth()),

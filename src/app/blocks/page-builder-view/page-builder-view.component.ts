@@ -1,8 +1,9 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FirestoreService} from "../../services/firestore/firestore.service";
 import {ActivatedRoute} from "@angular/router";
 import {Store} from "@ngrx/store";
-import {Observable} from "rxjs";
+import {forkJoin, lastValueFrom, Observable} from "rxjs";
+import {ContentType} from "../../modals/content-type";
 
 @Component({
   selector: 'ba-page-builder-view',
@@ -10,8 +11,8 @@ import {Observable} from "rxjs";
   styleUrls: ['./page-builder-view.component.scss']
 })
 export class PageBuilderViewComponent implements OnInit {
-  // @ts-ignore
-  public page$: Observable<any>;
+  public page$: Observable<any> | undefined;
+  public pages$: Observable<any> | undefined;
 
   public page: any;
   private user: any;
@@ -34,11 +35,27 @@ export class PageBuilderViewComponent implements OnInit {
 
   initPage(user: any, params: any) {
     this.page$ = this.firestoreService.getPage(user.uid, params.pageId);
+    this.pages$ = this.firestoreService.getPages(user.uid);
   }
 
   addContent(e: any) {
     this.firestoreService.addContentType(this.user, this.params.pageId, e).then(() => {
       alert('content added!');
+    }).catch(() => {
+      alert('something went wrong');
+    });
+  }
+
+  updateContent(contentBlocks: any) {
+    console.log(contentBlocks);
+
+    const observables: any = [];
+    contentBlocks.forEach((block: ContentType) => {
+      observables.push(this.firestoreService.updateContentType(this.user, this.params.pageId, block));
+    });
+
+    lastValueFrom(forkJoin(observables)).then(() => {
+      alert('order updated');
     }).catch(() => {
       alert('something went wrong');
     });
