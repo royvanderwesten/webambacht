@@ -25,7 +25,15 @@
     background-color: $--ba-color-black !important;
   }
 
-  &__articleCarousel {}
+  &__footer{
+    padding: 1em;
+    margin: 1em -1em -1em -1em;
+    height: 400px;
+    color: $--ba-color-white;
+    background: $--ba-color-black;
+  }
+
+  &__pageCarousel {}
   &__requestQuote {}
 
   &--editable {

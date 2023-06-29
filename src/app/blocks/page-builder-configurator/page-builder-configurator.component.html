@@ -1,23 +1,8 @@
 <ba-panel *ngIf="showCreateContent">
-  <button class="btn btn--primary" (click)="showCreateContent = false">
-    Sluiten
-  </button>
-
-  <form [formGroup]="createContentForm" (submit)="submitContent(createContentForm); showCreateContent = false">
-    <select formControlName="contentType">
-      <option *ngFor="let type of contentTypes" [value]="type.type">
-        {{ type.name }}
-      </option>
-    </select>
-
-    <input type="text" formControlName="title">
-    <input type="text" formControlName="description">
-
-    <button class="btn btn--primary"
-            [class.btn--disabled]="!createContentForm.valid">
-      Create
-    </button>
-  </form>
+  <ba-create-content
+  [contentAmnt]="page.length"
+  (fireCreateContent)="createContent.emit($event)"
+  (close)="showCreateContent = false"></ba-create-content>
 </ba-panel>
 
 <button class="btn btn--primary" (click)="showCreateContent = true">
@@ -53,12 +38,18 @@
          (mousedown)="contentType.classList.add('dragging')"
          (mouseup)="contentType.classList.remove('dragging')">
       <h2>
-        {{ contentSection.title }} {{ contentSection.index }}
+        {{ contentSection.fields.title }}
       </h2>
       <p>
-        {{ contentSection.description }}
+        {{ contentSection.fields.description }}
       </p>
     </div>
+  </div>
+
+  <div class="content-type content-type__footer">
+    <footer>
+
+    </footer>
   </div>
 </div>
 

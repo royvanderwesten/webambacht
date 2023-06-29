@@ -39,24 +39,18 @@ export class PageBuilderViewComponent implements OnInit {
   }
 
   addContent(e: any) {
-    this.firestoreService.addContentType(this.user, this.params.pageId, e).then(() => {
-      alert('content added!');
-    }).catch(() => {
+    this.firestoreService.addContentType(this.user, this.params.pageId, e).catch(() => {
       alert('something went wrong');
     });
   }
 
   updateContent(contentBlocks: any) {
-    console.log(contentBlocks);
-
     const observables: any = [];
     contentBlocks.forEach((block: ContentType) => {
       observables.push(this.firestoreService.updateContentType(this.user, this.params.pageId, block));
     });
 
-    lastValueFrom(forkJoin(observables)).then(() => {
-      alert('order updated');
-    }).catch(() => {
+    lastValueFrom(forkJoin(observables)).catch(() => {
       alert('something went wrong');
     });
   }

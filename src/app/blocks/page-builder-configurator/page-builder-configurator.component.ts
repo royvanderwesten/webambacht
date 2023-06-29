@@ -4,16 +4,11 @@ import {
   Input,
   OnInit,
   Output,
-  QueryList,
-  SimpleChanges,
-  ViewChild,
-  ViewChildren
 } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {ContentTypeHeader} from "../../modals/content-type-header";
 import {ContentType} from "../../modals/content-type";
 import {CdkDragDrop, moveItemInArray} from "@angular/cdk/drag-drop";
-import {Observable} from "rxjs";
+import {contentTypes} from "../../content-types";
 
 @Component({
   selector: 'ba-page-builder-configurator',
@@ -28,49 +23,11 @@ export class PageBuilderConfiguratorComponent implements OnInit {
   @Output() updateContent: EventEmitter<any> = new EventEmitter<any>();
 
   public contentBlocks: any;
-  public showCreateContent: boolean;
-  public createContentForm: FormGroup;
+  public showCreateContent: boolean = false;
 
-  public contentTypes: ContentType[];
+  constructor() {}
 
-
-  constructor(private fb: FormBuilder) {
-    const header: ContentTypeHeader = {
-      type: 'header',
-      id: '',
-      name: 'Header'
-    }
-
-    const requestQuote = {
-      type: 'webform',
-      id: '',
-      name: 'Formulier'
-    }
-
-    const articleCarousel = {
-      type: 'articleCarousel',
-      id: '',
-      name: 'Artikel carousel'
-    }
-
-    this.contentTypes = [header, requestQuote, articleCarousel];
-
-    this.showCreateContent = false;
-    this.createContentForm = this.fb.group({
-      contentType: ['', [Validators.required]],
-      title: ['', [Validators.required]],
-      description: ['', [Validators.required]]
-    });
-  }
-
-  ngOnInit(): void {}
-
-  submitContent(form: any) {
-    this.createContent.emit({
-      contentType :form.value.contentType,
-      description: form.value.description,
-      title: form.value.title
-    });
+  ngOnInit(): void {
   }
 
   drop(event: CdkDragDrop<string[]>) {

@@ -1,0 +1,23 @@
+<button class="btn btn--primary" (click)="this.close.emit()">
+  Sluiten
+</button>
+
+<form [formGroup]="createContentForm" (submit)="submitContent(createContentForm); showCreateContent = false">
+  {{ createContentForm.value | json }}
+  <select formControlName="contentType">
+    <option *ngFor="let type of contentTypes" [value]="type.type">
+      {{ type.name }}
+    </option>
+  </select>
+  <div formGroupName="fields">
+    <ng-container *ngFor="let inputField of dynamicInputFields">
+      <input *ngIf="inputField === 'title'" type="text" [placeholder]="inputField" [formControlName]="inputField">
+      <textarea *ngIf="inputField === 'description'" [placeholder]="inputField" [formControlName]="inputField"></textarea>
+      <input *ngIf="inputField === 'image'" type="text" [placeholder]="inputField" [formControlName]="inputField">
+    </ng-container>
+  </div>
+  <button class="btn btn--primary"
+    [class.btn--disabled]="!createContentForm.valid">
+    Create
+  </button>
+</form>
