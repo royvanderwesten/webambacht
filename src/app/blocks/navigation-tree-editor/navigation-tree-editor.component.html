@@ -1,0 +1,44 @@
+<h2>
+    Navigation editor
+</h2>
+
+<button (click)="mainPageDrag = !mainPageDrag">Toggle main page drag</button>
+
+<ng-container *ngIf="!mainPageDrag; else mainPageDragEditor">
+    <h3>Change navigation tree</h3>
+    <div cdkDropListGroup class="nav-tree-editor">
+        <!-- All lists in here will be connected. -->
+        <div cdkDropList *ngFor="let page of pageArr" class="nav-tree-editor__page-block"
+            (cdkDropListDropped)="drop($event, page)">
+            <h3>
+                {{ page.page }}
+            </h3>
+            <ul *ngIf="page.subPages.length > 0">
+                <li cdkDrag [cdkDragData]="subPage" class="nav-tree-editor__sub-page-label"
+                    *ngFor="let subPage of page.subPages">
+                    {{ subPage.page }}
+                </li>
+            </ul>
+        </div>
+    </div>
+</ng-container>
+
+<ng-template #mainPageDragEditor>
+    <h3>Change page order</h3>
+    <div class="nav-tree-editor"
+        [class.--editing-order]="mainPageDrag"
+        cdkDropList cdkDropListOrientation="horizontal" [cdkDropListData]="pageArr"
+        (cdkDropListDropped)="changePageOrder($event)">
+        <!-- All lists in here will be connected. -->
+        <div *ngFor="let page of pageArr" cdkDrag class="nav-tree-editor__page-block">
+            <h3>
+                {{ page.page }}
+            </h3>
+            <ul *ngIf="page.subPages.length > 0">
+                <li class="nav-tree-editor__sub-page-label" *ngFor="let subPage of page.subPages">
+                    {{ subPage.page }}
+                </li>
+            </ul>
+        </div>
+    </div>
+</ng-template>

@@ -1,7 +1,3 @@
-<button class="btn btn--primary" (click)="this.close.emit()">
-  Sluiten
-</button>
-
 <form [formGroup]="createContentForm" (submit)="submitContent(createContentForm); showCreateContent = false">
   {{ createContentForm.value | json }}
   <select formControlName="contentType">

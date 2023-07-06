@@ -1,5 +1,3 @@
-<button class="btn btn--primary" [routerLink]="[]">Sluiten</button>
-
 <form [formGroup]="createPageForm" (submit)="onSubmit(createPageForm)">
   <label for="pageTypeSelector">Type van de pagina</label>
   <select name="pageType" id="pageTypeSelector" #selectPageType (change)="setPageType(selectPageType.value)">

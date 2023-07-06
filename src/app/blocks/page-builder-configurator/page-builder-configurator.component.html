@@ -1,9 +1,9 @@
-<ba-panel *ngIf="showCreateContent">
+<ba-panel *ngIf="showCreateContent" 
+          (close)="showCreateContent = false">
   <ba-create-content
     [hardIndex]="newContentIndex"
     [contentAmnt]="page.length"
-    (fireCreateContent)="createContent.emit($event)"
-    (close)="showCreateContent = false"></ba-create-content>
+    (fireCreateContent)="createContent.emit($event)"></ba-create-content>
 </ba-panel>
 
 <button class="btn btn--primary" (click)="showCreateContent = true">
@@ -34,7 +34,7 @@
     </nav>
   </div>
 
-  <div cdkDropList class="example-list" [cdkDropListData]="page" (cdkDropListDropped)="drop($event)">
+  <div cdkDropList [cdkDropListData]="page" (cdkDropListDropped)="drop($event)">
     <ba-content-block
       *ngFor="let contentSection of page"
       [contentSection]="contentSection" cdkDrag>

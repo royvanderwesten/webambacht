@@ -49,7 +49,7 @@ export class CreatePageComponent implements OnInit {
   }
 
   onSubmit(form: any) {
-    this._firestoreService.createPage(form.value).then(() => {
+    this._firestoreService.createPage({...form.value, index: (this.pages ? this.pages.length + 1 : 0)}).then(() => {
       alert('Page created!');
       this.router.navigate(['/']);
     }).catch(() => {

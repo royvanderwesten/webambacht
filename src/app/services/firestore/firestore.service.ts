@@ -1,8 +1,8 @@
-import {Injectable} from '@angular/core';
-import {AngularFirestore} from "@angular/fire/compat/firestore";
-import {Store} from "@ngrx/store";
-import {Observable} from "rxjs";
-import {ContentType} from "../../modals/content-type";
+import { Injectable } from '@angular/core';
+import { AngularFirestore } from "@angular/fire/compat/firestore";
+import { Store } from "@ngrx/store";
+import { Observable } from "rxjs";
+import { ContentType } from "../../modals/content-type";
 import { v4 as uuidv4 } from "uuid";
 
 @Injectable({
@@ -16,7 +16,7 @@ export class FirestoreService {
   }
 
   getPages(uid: string) {
-    return this.db.collection('users').doc(uid).collection('pages').valueChanges();
+    return this.db.collection('users').doc(uid).collection('pages', ref => ref.orderBy('index', 'asc')).valueChanges();
   }
 
   getPage(uid: string, pageId: string): Observable<any> {
@@ -30,18 +30,57 @@ export class FirestoreService {
   }
 
   createPage(pageValue: any): Promise<any> {
+    console.log(pageValue);
+
     return new Promise<void>((resolve, reject) => {
       this.store.select('user').subscribe(user => {
         this.db.collection('users')
           .doc(user.uid)
           .collection('pages')
           .doc(pageValue.url)
-          .set({page: pageValue.name, url: pageValue.url, pageType: pageValue.pageType, mainLink: pageValue.mainPageLink ? pageValue.mainPageLink : null })
+          .set({ index: pageValue.index, page: pageValue.name, url: pageValue.url, pageType: pageValue.pageType, mainLink: pageValue.mainPageLink ? pageValue.mainPageLink : null })
           .then(() => {
             resolve();
           }).catch(() => {
-          reject();
-        });
+            reject();
+          });
+      });
+    })
+  }
+
+  updateNavigationTree(subPage: any, targetPage: any): Promise<any> {
+    // This update page function for now only changes the main link property of subpages
+    return new Promise<void>((resolve, reject) => {
+      this.store.select('user').subscribe(user => {
+        const dbPageContentPath = this.db.collection('users')
+          .doc(user.uid)
+          .collection('pages')
+          .doc(subPage.url).update({ mainLink: targetPage.url });
+
+          dbPageContentPath.then(() => {
+            resolve();
+          }).catch(() => {
+            reject();
+          });
+      });
+    })
+  }
+  
+
+  updatePageOrder(targetPage: any): Promise<any> {
+    // This update page function for now only changes the main link property of subpages
+    return new Promise<void>((resolve, reject) => {
+      this.store.select('user').subscribe(user => {
+        const dbPageContentPath = this.db.collection('users')
+          .doc(user.uid)
+          .collection('pages')
+          .doc(targetPage.url).set(targetPage);
+
+          dbPageContentPath.then(() => {
+            resolve();
+          }).catch(() => {
+            reject();
+          });
       });
     })
   }
@@ -56,13 +95,13 @@ export class FirestoreService {
         .doc(url)
         .collection('content')
         .doc(uuId)
-        .set({...contentType, id: uuId});
+        .set({ ...contentType, id: uuId });
 
-        dbPageContentPath.then(() => {
-          resolve();
-        }).catch(() => {
-          reject();
-        });
+      dbPageContentPath.then(() => {
+        resolve();
+      }).catch(() => {
+        reject();
+      });
     });
   }
 
@@ -76,11 +115,11 @@ export class FirestoreService {
         .doc(id)
         .delete();
 
-        dbPageContentPath.then(() => {
-          resolve();
-        }).catch(() => {
-          reject();
-        });
+      dbPageContentPath.then(() => {
+        resolve();
+      }).catch(() => {
+        reject();
+      });
     });
   }
 

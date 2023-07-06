@@ -1,6 +1,15 @@
+<ba-panel *ngIf="showEditNavigationPanel" [bigPanel]="true" (close)="showEditNavigationPanel = false">
+    <ba-navigation-tree-editor [pages]="pages"></ba-navigation-tree-editor>
+</ba-panel>
+
 <h3>Webambacht</h3>
 
-<ba-main-navigation></ba-main-navigation>
-
-{{ pages | json }}
 <ba-account-dropdown *ngIf="userData$ | async as userData" [userData]="userData"></ba-account-dropdown>
+
+<nav>
+    <ul>
+        <li>
+            <button (click)="showEditNavigationPanel = true">Navigation</button>
+        </li>
+    </ul>
+</nav>

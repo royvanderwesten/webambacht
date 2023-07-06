@@ -1,5 +1,6 @@
-<div class="panel">
+<div class="panel" [class.--big]="bigPanel">
   <div class="panel__content">
+    <button class="btn btn--primary" (click)="close.emit()">Close!</button>
     <ng-content></ng-content>
   </div>
 </div>

@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {FirestoreService} from "../../services/firestore/firestore.service";
 import {Store} from "@ngrx/store";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'ba-page-builder',
@@ -14,6 +14,7 @@ export class PageBuilderComponent implements OnInit {
 
   constructor(private _store: Store<any>,
               private route: ActivatedRoute,
+              private router: Router,
               private firestoreService: FirestoreService) {
     this.showCreatePagePanel = false;
 
@@ -31,5 +32,9 @@ export class PageBuilderComponent implements OnInit {
           }
         )
     });
+  }
+
+  closeCreatePagePanel() {
+    this.router.navigate([]);
   }
 }

@@ -15,6 +15,8 @@ import {AngularFirestore} from "@angular/fire/compat/firestore";
 export class DefaultNavComponent implements OnInit {
   @Input() pages: any[] = [];
 
+  showEditNavigationPanel: boolean = false;
+
   authState$: Observable<User | any>;
   authStateSubscription: Subscription;
 

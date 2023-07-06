@@ -36,6 +36,7 @@ import { SortByPipe } from './pipes/sort-by.pipe';
 import { CreateContentComponent } from './components/create-content/create-content.component';
 import { ContentBlockComponent } from './components/content-block/content-block.component';
 import { GetSubpageLinkPipe } from './pipes/get-subpage-link.pipe';
+import { NavigationTreeEditorComponent } from './blocks/navigation-tree-editor/navigation-tree-editor.component';
 
 const firebaseConfig = {
   apiKey: "AIzaSyDonoOIsH_MnxdhNBWbpCrT25llWwXCYGs",
@@ -68,7 +69,8 @@ const firebaseConfig = {
     SortByPipe,
     CreateContentComponent,
     ContentBlockComponent,
-    GetSubpageLinkPipe
+    GetSubpageLinkPipe,
+    NavigationTreeEditorComponent
   ],
   imports: [
     DragDropModule,

@@ -1,0 +1,43 @@
+.nav-tree-editor {
+    display: flex;
+    flex-direction: row;
+    padding: 3em 0;
+    max-width: 1140px;
+
+    &.--editing-order {
+        .nav-tree-editor__page-block {
+            border: 2px solid $--ba-color-light-grey;
+            border-radius: $--ba-border-radius;
+            margin: .5em;
+            transition: .25s;
+            cursor: pointer;
+            box-shadow: $--ba-box-shadow;
+        }
+
+        .nav-tree-editor__sub-page-label {
+            border: none;
+            pointer-events: none;
+        }
+    }
+
+    &__page-block {
+        padding: 1em;
+        border-right: 2px dashed $--ba-color-light-grey;
+        flex: 1;
+    }
+
+    &__sub-page-label {
+        padding: 1em;
+        margin: 1em 0;
+        border-left: 2px solid $--ba-color-primary;
+        flex: 1;
+        cursor: pointer;
+        transition: .25s;
+
+        &:hover {
+            border-radius: $--ba-border-radius;
+            background: $--ba-color-primary;
+            color: $--ba-color-white;
+        }
+    }
+}

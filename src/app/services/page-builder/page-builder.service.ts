@@ -8,6 +8,10 @@ export class PageBuilderService {
   constructor() { }
 
   createNavArray(pages: any[]) {
+    if (!pages) {
+      return [];
+    }
+
     let mainNavItems = pages.filter((p: any) => p.pageType === 'main');
     mainNavItems.forEach((mNavItem: any) => {
       const subNavItems = pages.filter((sNavItem: any) => sNavItem.mainLink === mNavItem.url);

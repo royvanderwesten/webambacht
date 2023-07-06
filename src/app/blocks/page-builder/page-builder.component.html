@@ -1,4 +1,4 @@
-<ba-panel *ngIf="showCreatePagePanel">
+<ba-panel *ngIf="showCreatePagePanel" (close)="closeCreatePagePanel()">
   <ba-create-page [pages]="pages"></ba-create-page>
 </ba-panel>
 
