@@ -1,6 +1,24 @@
 <button class="btn btn--primary" [routerLink]="[]">Sluiten</button>
 
 <form [formGroup]="createPageForm" (submit)="onSubmit(createPageForm)">
+  <label for="pageTypeSelector">Type van de pagina</label>
+  <select name="pageType" id="pageTypeSelector" #selectPageType (change)="setPageType(selectPageType.value)">
+    <option *ngFor="let type of pageTypes" [value]="type">{{ type }}</option>
+  </select>
+
+  <br>
+
+  <ng-container *ngIf="viewSetMainLink">
+    <label for="mainPageLinkSelector">Is onderdeel van:</label>
+    <select name="mainPageLink" id="mainPageLinkSelector" #selectMainLink (change)="setMainLink(selectMainLink.value)">
+      <ng-container *ngFor="let page of pages">
+        <option *ngIf="page.pageType === 'main'" [value]="page.url">{{ page.page }}</option>
+      </ng-container>
+    </select>
+  </ng-container>
+
+  <br>
+
   <label for="name">Naam van de pagina</label>
   <input type="text" id="name" formControlName="name" (input)="renderUrl()">
 

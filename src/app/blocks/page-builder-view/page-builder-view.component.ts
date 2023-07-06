@@ -44,6 +44,12 @@ export class PageBuilderViewComponent implements OnInit {
     });
   }
 
+  deleteContent(contentId: string) {
+    this.firestoreService.deleteContentType(this.user, this.params.pageId, contentId).catch(() => {
+      alert('something went wrong');
+    });
+  }
+
   updateContent(contentBlocks: any) {
     const observables: any = [];
     contentBlocks.forEach((block: ContentType) => {

@@ -1,8 +1,9 @@
 <ba-panel *ngIf="showCreateContent">
   <ba-create-content
-  [contentAmnt]="page.length"
-  (fireCreateContent)="createContent.emit($event)"
-  (close)="showCreateContent = false"></ba-create-content>
+    [hardIndex]="newContentIndex"
+    [contentAmnt]="page.length"
+    (fireCreateContent)="createContent.emit($event)"
+    (close)="showCreateContent = false"></ba-create-content>
 </ba-panel>
 
 <button class="btn btn--primary" (click)="showCreateContent = true">
@@ -16,34 +17,34 @@
     </div>
     <nav>
       <ul>
-        <ng-container *ngFor="let page of pages">
-          <a>
-            <li>
-              {{ page.page }}
-            </li>
-          </a>
-        </ng-container>
+        <a *ngFor="let navItem of navItems">
+          <li>
+            {{ navItem.page }}
+
+            <nav *ngIf="navItem.subPages && navItem.subPages.length > 0">
+              <ul>
+                <li *ngFor="let subPage of navItem.subPages">
+                  {{ subPage.page }}
+                </li>
+              </ul>
+            </nav>
+          </li>
+        </a>
       </ul>
     </nav>
   </div>
 
-  <div cdkDropList class="example-list"
-       [cdkDropListData]="page"
-       (cdkDropListDropped)="drop($event)">
-    <div *ngFor="let contentSection of page"
-         cdkDrag
-         #contentType
-         class="content-type content-type--editable"
-         [class]="'content-type__' + contentSection.contentType"
-         (mousedown)="contentType.classList.add('dragging')"
-         (mouseup)="contentType.classList.remove('dragging')">
-      <h2>
-        {{ contentSection.fields.title }}
-      </h2>
-      <p>
-        {{ contentSection.fields.description }}
-      </p>
-    </div>
+  <div cdkDropList class="example-list" [cdkDropListData]="page" (cdkDropListDropped)="drop($event)">
+    <ba-content-block
+      *ngFor="let contentSection of page"
+      [contentSection]="contentSection" cdkDrag>
+      <div class="content-controls">
+        <button type="button" (click)="this.showCreateContent = true; newContentIndex = 0">Insert above</button>
+        <button type="button" (click)="this.showCreateContent = true">Edit</button>
+        <button type="button" (click)="this.deleteContent.emit(contentSection.id)">Delete</button>
+        <button type="button" (click)="this.showCreateContent = true">Insert under</button>
+      </div>
+    </ba-content-block>
   </div>
 
   <div class="content-type content-type__footer">
@@ -52,4 +53,3 @@
     </footer>
   </div>
 </div>
-

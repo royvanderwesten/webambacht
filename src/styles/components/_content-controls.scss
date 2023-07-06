@@ -1,0 +1,10 @@
+.content-controls {
+    height: 100%;
+    background-color: red;
+    right: 0;
+    top: 0;
+    z-index: 2;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+}

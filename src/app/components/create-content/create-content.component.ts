@@ -10,6 +10,7 @@ import { ContentType } from "../../modals/content-type";
 })
 export class CreateContentComponent implements OnInit {
   @Input() contentAmnt: number = 0;
+  @Input() hardIndex: number = 0;
 
   @Output() close: EventEmitter<void> = new EventEmitter<void>();
   @Output() fireCreateContent: EventEmitter<any> = new EventEmitter<any>();
@@ -48,6 +49,6 @@ export class CreateContentComponent implements OnInit {
   }
 
   submitContent(form: any) {
-    this.fireCreateContent.emit({...form.value, index: this.contentAmnt});
+    this.fireCreateContent.emit({...form.value, index: this.hardIndex ? this.hardIndex : this.contentAmnt});
   }
 }

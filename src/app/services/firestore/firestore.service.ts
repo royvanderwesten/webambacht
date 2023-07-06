@@ -29,14 +29,14 @@ export class FirestoreService {
       .valueChanges(); // Use valueChanges() instead of get()
   }
 
-  createPage(name: string, url: string): Promise<any> {
+  createPage(pageValue: any): Promise<any> {
     return new Promise<void>((resolve, reject) => {
       this.store.select('user').subscribe(user => {
         this.db.collection('users')
           .doc(user.uid)
           .collection('pages')
-          .doc(url)
-          .set({page: name, url: url})
+          .doc(pageValue.url)
+          .set({page: pageValue.name, url: pageValue.url, pageType: pageValue.pageType, mainLink: pageValue.mainPageLink ? pageValue.mainPageLink : null })
           .then(() => {
             resolve();
           }).catch(() => {
@@ -57,6 +57,24 @@ export class FirestoreService {
         .collection('content')
         .doc(uuId)
         .set({...contentType, id: uuId});
+
+        dbPageContentPath.then(() => {
+          resolve();
+        }).catch(() => {
+          reject();
+        });
+    });
+  }
+
+  deleteContentType(user: any, url: string, id: string): Promise<any> {
+    return new Promise<void>((resolve, reject) => {
+      const dbPageContentPath = this.db.collection('users')
+        .doc(user.uid)
+        .collection('pages')
+        .doc(url)
+        .collection('content')
+        .doc(id)
+        .delete();
 
         dbPageContentPath.then(() => {
           resolve();

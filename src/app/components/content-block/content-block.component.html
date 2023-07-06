@@ -1,0 +1,14 @@
+<ng-content *ngIf="showControls"></ng-content>
+<div #contentType
+    class="content-type content-type--editable"
+    [class]="'content-type__' + contentSection.contentType"
+    (mousedown)="contentType.classList.add('dragging')"
+    (mouseup)="contentType.classList.remove('dragging')"
+    (mouseover)="showControls = true">
+    <h2>
+        {{ contentSection.fields.title }}
+    </h2>
+    <p>
+        {{ contentSection.fields.description }}
+    </p>
+</div>

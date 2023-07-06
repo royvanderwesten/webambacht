@@ -34,6 +34,8 @@ import { DataMapPipe } from './pipes/data-map.pipe';
 import {DragDropModule} from "@angular/cdk/drag-drop";
 import { SortByPipe } from './pipes/sort-by.pipe';
 import { CreateContentComponent } from './components/create-content/create-content.component';
+import { ContentBlockComponent } from './components/content-block/content-block.component';
+import { GetSubpageLinkPipe } from './pipes/get-subpage-link.pipe';
 
 const firebaseConfig = {
   apiKey: "AIzaSyDonoOIsH_MnxdhNBWbpCrT25llWwXCYGs",
@@ -64,7 +66,9 @@ const firebaseConfig = {
     PanelComponent,
     DataMapPipe,
     SortByPipe,
-    CreateContentComponent
+    CreateContentComponent,
+    ContentBlockComponent,
+    GetSubpageLinkPipe
   ],
   imports: [
     DragDropModule,

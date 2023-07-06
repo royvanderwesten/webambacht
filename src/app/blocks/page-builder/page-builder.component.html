@@ -1,10 +1,10 @@
 <ba-panel *ngIf="showCreatePagePanel">
-  <ba-create-page></ba-create-page>
+  <ba-create-page [pages]="pages"></ba-create-page>
 </ba-panel>
 
 <div class="wrapper">
   <div class="side-bar">
-    <ba-default-nav></ba-default-nav>
+    <ba-default-nav [pages]="pages"></ba-default-nav>
   </div>
   <div class="content">
     <ba-page-builder-nav [pages]="pages"></ba-page-builder-nav>

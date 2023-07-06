@@ -1,4 +1,6 @@
 <h3>Webambacht</h3>
 
 <ba-main-navigation></ba-main-navigation>
+
+{{ pages | json }}
 <ba-account-dropdown *ngIf="userData$ | async as userData" [userData]="userData"></ba-account-dropdown>

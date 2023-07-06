@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {map, Observable, Subscription} from "rxjs";
 import {User} from "@angular/fire/auth";
 import {AngularFireAuth} from "@angular/fire/compat/auth";
@@ -13,6 +13,8 @@ import {AngularFirestore} from "@angular/fire/compat/firestore";
   styles: []
 })
 export class DefaultNavComponent implements OnInit {
+  @Input() pages: any[] = [];
+
   authState$: Observable<User | any>;
   authStateSubscription: Subscription;
 
